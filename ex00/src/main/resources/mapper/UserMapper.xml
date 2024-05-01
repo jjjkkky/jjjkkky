@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 Mapper 인터페이스의 경로를 그대로 써 준다 -->
+<mapper namespace="com.example.demo.mapper.UserMapper">
+	<!--
+		id 속성 값은 쿼리를 사용할 때 호출할 메서드의 이름과 동일하게 맞추어야 함 
+		결국 namespace는 인터페이스와 그 경로이며 id는 메서드명임
+		기존의 mybatis 호출시 해당 namespace.id 형태의 인터페이스를 내부적으로 구현한 클래스와 메서드를 생성, DB에 접속하는 거였음
+	-->
+	<insert id="insertUserAsJoin">
+		INSERT INTO s_user
+		VALUES
+		(
+			#{id},
+			#{pw},
+			#{name},
+			#{age},
+			now()
+		)
+	</insert>
+	<delete id="deleteUserAsLeave">
+		DELETE FROM s_user
+		WHERE id = #{id}
+	</delete>
+	<select id="selectUserRowByUserid">
+		SELECT * FROM s_user
+		WHERE id = #{id}
+	</select>
+</mapper>
